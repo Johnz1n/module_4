@@ -1,0 +1,16 @@
+# Imagem de desenvolvimento local — código montado via volume, reload ativo
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Container é Linux mesmo no Mac M3 — instala CPU torch
+RUN pip install --no-cache-dir torch==2.3.0 --index-url https://download.pytorch.org/whl/cpu
+
+COPY requirements.txt requirements-dev.txt ./
+# Instala apenas deps de API (sem torch duplicado, sem matplotlib)
+RUN pip install --no-cache-dir -r requirements.txt
+
+EXPOSE 8000
+
+# --reload detecta mudanças no código montado via volume
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

@@ -1,0 +1,18 @@
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.DS_Store
+
+# Artefactos gerados pelo treino
+artifacts/model.pt
+artifacts/model_best.pt
+artifacts/scaler.pkl
+artifacts/evaluation_plot.png
+
+# Dados brutos baixados
+data/raw/
+
+# Variáveis de ambiente locais
+.env

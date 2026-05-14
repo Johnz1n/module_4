@@ -214,7 +214,7 @@ make run-local
 | Ambiente | URL |
 |---|---|
 | Local | http://localhost:8000/docs |
-| Produção | `https://<seu-projeto>.railway.app/docs` |
+| Produção | `https://pos-tech.borca.dev/docs` |
 
 ### Endpoints
 

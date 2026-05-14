@@ -239,7 +239,7 @@ O processo de optimização do modelo foi documentado em detalhe, cobrindo 6 ite
 | RMSE | R$ 1.5776 | **R$ 0.7542** |
 
 As principais decisões que levaram ao melhor resultado:
-- Substituição de `MSELoss` por `HuberLoss(delta=0.1)` — mais robusto a spikes políticos
+- Substituição de `MSELoss` por `HuberLoss(delta=0.1)` — mais robusto a maiores volatilidades
 - Dropout elevado para **0.4** — previne memorização de padrões não generalizáveis
 - Adição de `Close_pct` como 15ª feature — sinal direcional explícito
 - `ReduceLROnPlateau(factor=0.7, min_lr=1e-4)` — decaimento mais gradual do LR

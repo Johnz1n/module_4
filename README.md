@@ -245,6 +245,10 @@ As principais decisões que levaram ao melhor resultado:
 - `ReduceLROnPlateau(factor=0.7, min_lr=1e-4)` — decaimento mais gradual do LR
 - Early stopping com `patience=100` — evita epochs desperdiçadas após convergência
 
+### Preço Real vs. Previsto — Test Set (Run 6)
+
+![Avaliação BBAS3](artifacts/evaluation_plot.png)
+
 ---
 
 ## Referência dos Comandos Make

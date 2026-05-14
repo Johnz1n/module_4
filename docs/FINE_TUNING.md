@@ -8,12 +8,12 @@ Registo das iterações de optimização realizadas durante o desenvolvimento, c
 
 | Run | Dropout | LR | Epochs | LOOKBACK | Loss | Factor | Early Stop | MAE (R$) | RMSE (R$) | MAPE |
 |-----|---------|-----|--------|----------|------|--------|------------|----------|-----------|------|
-| 1 — Baseline | 0.2 | 0.001 | 100 | 30 | MSELoss | 0.5 | ✗ | — | — | 4.80% |
-| 2 — Regressão | 0.2 | 0.001 | 200 | 60 | HuberLoss(δ=1.0) | 0.5 | ✗ | — | — | 7.75% |
-| 3 — Correcção | 0.2 | 0.001 | 200 | 30 | HuberLoss(δ=0.1) | 0.5 | ✗ | 0.9819 | 1.4828 | 4.24% |
-| 4 | 0.4 | 0.001 | 200 | 30 | HuberLoss(δ=0.1) | 0.7 | ✗ | 0.6235 | 0.8149 | 2.70% |
-| 5 — Exploração | 0.3 | 0.002 | 500* | 30 | HuberLoss(δ=0.1) | 0.7 | ✓ (ep. 190) | 0.6285 | 0.7907 | 2.72% |
-| 6 — **Melhor** | 0.4 | 0.001 | 500* | 30 | HuberLoss(δ=0.1) | 0.7 | ✓ (ep. 120) | **0.5907** | **0.7542** | **2.56%** |
+| 1 — Baseline | 0.2 | 0.001 | 100 | 30 | MSELoss | 0.5 | ✗ | R$ 1.1098 | R$ 1.5776 | 4.80% |
+| 2 — Regressão | 0.2 | 0.001 | 200 | 60 | HuberLoss(δ=1.0) | 0.5 | ✗ | R$ 1.8715 | R$ 2.4612 | 7.75% |
+| 3 — Correcção | 0.2 | 0.001 | 200 | 30 | HuberLoss(δ=0.1) | 0.5 | ✗ | R$ 0.9819 | R$ 1.4828 | 4.24% |
+| 4 | 0.4 | 0.001 | 200 | 30 | HuberLoss(δ=0.1) | 0.7 | ✗ | R$ 0.6235 | R$ 0.8149 | 2.70% |
+| 5 — Exploração | 0.3 | 0.002 | 500* | 30 | HuberLoss(δ=0.1) | 0.7 | ✓ (ep. 190) | R$ 0.6285 | R$ 0.7907 | 2.72% |
+| 6 — **Melhor** | 0.4 | 0.001 | 500* | 30 | HuberLoss(δ=0.1) | 0.7 | ✓ (ep. 120) | **R$ 0.5907** | **R$ 0.7542** | **2.56%** |
 
 *EPOCHS=500 com early stopping — parou antes de completar todas as epochs.
 

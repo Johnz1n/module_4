@@ -28,17 +28,17 @@ def _train_epoch(
     criterion: nn.Module,
     device: torch.device,
 ) -> float:
-    model.train()
+    model.train()                                                         # activa dropout e BatchNorm no modo treino
     total_loss = 0.0
-    for x, y in loader:
-        x, y = x.to(device), y.to(device)
-        optimizer.zero_grad()
-        loss = criterion(model(x), y)
-        loss.backward()
-        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
-        optimizer.step()
-        total_loss += loss.item()
-    return total_loss / len(loader)
+    for x, y in loader:                                                   # x: (batch, 30, 15) | y: (batch, 1)
+        x, y = x.to(device), y.to(device)                                 # move tensores para MPS/CPU
+        optimizer.zero_grad()                                             # limpa gradientes do batch anterior
+        loss = criterion(model(x), y)                                     # forward pass + calcula HuberLoss
+        loss.backward()                                                   # backpropagation: calcula ∂loss/∂w
+        torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)  # evita exploding gradients no LSTM
+        optimizer.step()                                                  # actualiza pesos com Adam
+        total_loss += loss.item()                                         # acumula loss sem manter o grafo
+    return total_loss / len(loader)                                       # loss média da epoch
 
 
 def _eval_epoch(
@@ -77,9 +77,6 @@ def train(
     logger.info("Device de treino: %s", device)
 
     model = LSTMModel().to(device)
-    # HuberLoss é mais robusta a outliers que MSELoss: penaliza quadraticamente
-    # erros pequenos (<delta) e linearmente erros grandes, reduzindo o impacto
-    # de spikes de mercado no gradiente
     criterion = nn.HuberLoss(delta=0.1)
     optimizer = torch.optim.Adam(model.parameters(), lr=LEARNING_RATE)
     scheduler = ReduceLROnPlateau(optimizer, mode="min", patience=15, factor=0.7, min_lr=1e-4)
